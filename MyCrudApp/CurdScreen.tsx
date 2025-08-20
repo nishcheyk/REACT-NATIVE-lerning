@@ -1,5 +1,7 @@
-// CrudScreen.tsx
 import React, { useState } from "react";
+import Lottie from "lottie-react";
+import animationData from "./Recruitment.json"; // Ensure this file exists and path is correct
+
 import {
   View,
   Text,
@@ -17,7 +19,7 @@ interface Item {
   value: string;
 }
 
-// If you're using React Navigation, navigation is passed as a prop
+// Main CRUD screen component
 export default function CrudScreen({ navigation }: any) {
   const [items, setItems] = useState<Item[]>([]);
   const [text, setText] = useState<string>("");
@@ -57,6 +59,9 @@ export default function CrudScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>React Native CRUD Demo - TypeScript</Text>
+
+      {/* Lottie animation */}
+      <Lottie animationData={animationData} loop={true} style={styles.lottie} />
 
       {/* Logout Button */}
       <View style={{ marginBottom: 20 }}>
@@ -116,14 +121,29 @@ export default function CrudScreen({ navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, paddingTop: 50, backgroundColor: "#fff" },
+  container: {
+    flex: 1,
+    padding: 20,
+    paddingTop: 50,
+    backgroundColor: "#fff",
+  },
   heading: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
   },
-  inputRow: { flexDirection: "row", marginBottom: 20, alignItems: "center" },
+  lottie: {
+    width: 150,
+    height: 150,
+    alignSelf: "center",
+    marginBottom: 20,
+  },
+  inputRow: {
+    flexDirection: "row",
+    marginBottom: 20,
+    alignItems: "center",
+  },
   input: {
     flex: 1,
     borderWidth: 1,
@@ -146,7 +166,7 @@ const styles = StyleSheet.create({
   btn: {
     paddingVertical: 5,
     paddingHorizontal: 10,
-    borderRadrius: 5,
+    borderRadius: 5,
     marginLeft: 10,
   },
   editBtn: { backgroundColor: "#4CAF50" },

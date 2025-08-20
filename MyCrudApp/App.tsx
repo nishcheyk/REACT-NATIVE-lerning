@@ -1,11 +1,9 @@
-// App.tsx
 import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import AuthScreen from "./AuthScreen"; // Your login/signup screen
-import CrudScreen from "./CurdScreen"; // Your CRUD screen (the code you shared)
-
+import AuthScreen from "./AuthScreen";
+import CrudScreen from "./CurdScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
