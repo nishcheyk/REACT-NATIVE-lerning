@@ -1,66 +1,78 @@
-import React, { useState, createContext } from "react";
+import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  View,
+  Text,
+  ScrollView,
+  Button,
+  TouchableHighlight,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+  Platform,
+} from "react-native";
 
-import AuthScreen from "./screens/AuthScreen";
-import AdminHome from "./screens/AdminHome";
-import CreateQuiz from "./screens/CreateQuiz";
-import UserHome from "./screens/UserHome";
-import QuizAttempt from "./screens/QuizAttempt";
+import Bottom from "./screens/Bottom";
+function HomeScreen() {
+  return (
+    <View>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+function ProfileScreen({ navigation }) {
+  return (
+    <ScrollView>
+      <Text>Lots of content here...</Text>
 
-const Stack = createNativeStackNavigator();
+      <View>
+        <Text> Welcome to react Native!</Text>
+        <Button
+          title="Go to Details"
+          onPress={() => navigation.navigate("Details")}
+        />
+        <TouchableOpacity onPress={() => alert("TouchableOpacity Tapped!")}>
+          <Text
+            style={{ color: "white", backgroundColor: "purple", padding: 16 }}
+          >
+            Tap Here
+          </Text>
+        </TouchableOpacity>
+        <TouchableNativeFeedback
+          onPress={() => alert("TouchableOpacity Tapped!")}
+        >
+          <Text
+            style={{ color: "white", backgroundColor: "purple", padding: 16 }}
+          >
+            Tap Here
+          </Text>
+        </TouchableNativeFeedback>
+        <TouchableHighlight onPress={() => alert("TouchableOpacity Tapped!")}>
+          <Text
+            style={{ color: "white", backgroundColor: "purple", padding: 16 }}
+          >
+            Tap Here
+          </Text>
+        </TouchableHighlight>
 
-export const AuthContext = createContext<any>({
-  user: null,
-  login: (role: string) => {},
-  logout: () => {},
-});
+        <Text>
+          {Platform.OS === "android" ? "Hello iOS!" : "Hello Android!"}
+        </Text>
+      </View>
+    </ScrollView>
+  );
+}
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
-  const [user, setUser] = useState<{ role: string } | null>(null);
-
-  const login = (role: string) => setUser({ role });
-  const logout = () => setUser(null);
-
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          {!user ? (
-            <Stack.Screen
-              name="Auth"
-              component={AuthScreen}
-              options={{ headerShown: false }}
-            />
-          ) : user.role === "admin" ? (
-            <>
-              <Stack.Screen
-                name="AdminHome"
-                component={AdminHome}
-                options={{ title: "Admin Dashboard" }}
-              />
-              <Stack.Screen
-                name="CreateQuiz"
-                component={CreateQuiz}
-                options={{ title: "Create Quiz" }}
-              />
-            </>
-          ) : (
-            <>
-              <Stack.Screen
-                name="UserHome"
-                component={UserHome}
-                options={{ title: "Quizzes" }}
-              />
-              <Stack.Screen
-                name="QuizAttempt"
-                component={QuizAttempt}
-                options={{ title: "Attempt Quiz" }}
-              />
-            </>
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </AuthContext.Provider>
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Bottomtop" component={Bottom} />
+        <Drawer.Screen name="Profile" component={ProfileScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }

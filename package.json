@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/nishcheyk/REACT-NATIVE-lerning/issues"
   },
-  "homepage": "https://github.com/nishcheyk/REACT-NATIVE-lerning#readme"
+  "homepage": "https://github.com/nishcheyk/REACT-NATIVE-lerning#readme",
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "^7.4.6",
+    "@react-navigation/drawer": "^7.5.7",
+    "react-native-gesture-handler": "^2.28.0",
+    "react-native-reanimated": "^4.0.2"
+  }
 }
